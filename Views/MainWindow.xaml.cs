@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Forms;
 using quiztime.Models;
 using quiztime.Services;
 
@@ -26,12 +27,16 @@ namespace quiztime.Views
                     DisplayWindow.InitializeDisplayOnAllScreens();
                     DisplayWindow.Show();
                     
-                    // Na Show(), maximaliseer het venster
-                    var screens = System.Windows.Forms.Screen.AllScreens;
+                    // Na Show(), even wachten en dan maximaliseer het venster
+                    var screens = Screen.AllScreens;
                     if (screens.Length > 1)
                     {
-                        DisplayWindow.WindowState = System.Windows.WindowState.Maximized;
-                        System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd bij startup");
+                        // Gebruik Dispatcher om dit uit te stellen tot na rendering
+                        Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            DisplayWindow.WindowState = System.Windows.WindowState.Maximized;
+                            System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd bij startup op scherm: {screens[1].DeviceName}");
+                        }), System.Windows.Threading.DispatcherPriority.Background);
                     }
                 }
                 
@@ -39,7 +44,7 @@ namespace quiztime.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fout bij het laden van de database: {ex.Message}", "Fout");
+                System.Windows.MessageBox.Show($"Fout bij het laden van de database: {ex.Message}", "Fout");
             }
         }
 
@@ -53,7 +58,7 @@ namespace quiztime.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Fout bij het laden van quizzen: {ex.Message}\n\n{ex.StackTrace}", "Database Fout");
+                System.Windows.MessageBox.Show($"Fout bij het laden van quizzen: {ex.Message}\n\n{ex.StackTrace}", "Database Fout");
                 System.Diagnostics.Debug.WriteLine($"❌ Fout: {ex}");
             }
         }
@@ -80,7 +85,7 @@ namespace quiztime.Views
         {
             if (SelectedQuiz == null)
             {
-                MessageBox.Show("Selecteer eerst een quiz uit de lijst.");
+                System.Windows.MessageBox.Show("Selecteer eerst een quiz uit de lijst.");
                 return;
             }
 
@@ -93,7 +98,7 @@ namespace quiztime.Views
         {
             if (SelectedQuiz == null)
             {
-                MessageBox.Show("Selecteer eerst een quiz om te bewerken.");
+                System.Windows.MessageBox.Show("Selecteer eerst een quiz om te bewerken.");
                 return;
             }
 
@@ -108,16 +113,16 @@ namespace quiztime.Views
         {
             if (SelectedQuiz == null)
             {
-                MessageBox.Show("Selecteer eerst een quiz om te verwijderen.");
+                System.Windows.MessageBox.Show("Selecteer eerst een quiz om te verwijderen.");
                 return;
             }
 
-            var confirm = MessageBox.Show(
+            var confirm = System.Windows.MessageBox.Show(
                 $"Weet je zeker dat je '{SelectedQuiz.Naam}' wilt verwijderen?",
                 "Bevestig verwijderen",
-                MessageBoxButton.YesNo);
+                System.Windows.MessageBoxButton.YesNo);
 
-            if (confirm == MessageBoxResult.Yes)
+            if (confirm == System.Windows.MessageBoxResult.Yes)
             {
                 _dbService.DeleteQuiz(SelectedQuiz.Id);
                 quizzen.Remove(SelectedQuiz);

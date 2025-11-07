@@ -83,7 +83,7 @@ namespace quiztime.Views
                 this.Width = workingArea.Width;
                 this.Height = workingArea.Height;
 
-                System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow op tweede scherm: {secondScreen.DeviceName}");
+                System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow op tweede scherm: {secondScreen.DeviceName} ({workingArea.Left}, {workingArea.Top}, {workingArea.Width}x{workingArea.Height})");
             }
             else
             {
@@ -97,13 +97,6 @@ namespace quiztime.Views
                 this.Height = primaryScreen.Height;
 
                 System.Diagnostics.Debug.WriteLine($"⚠️ Slechts 1 scherm, DisplayWindow rechts gepositioneerd");
-            }
-
-            // Na positioning, maximaliseer het venster
-            if (screens.Length > 1)
-            {
-                this.WindowState = System.Windows.WindowState.Maximized;
-                System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd op tweede scherm");
             }
         }
 
