@@ -1,0 +1,89 @@
+﻿<Window x:Class="quiztime.Views.QuizControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quiz Besturing" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F5F5">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="15 10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <TextBlock Grid.Row="0" 
+                   Text="Quiz Besturing" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   Foreground="#1976D2"
+                   Margin="0 0 0 20"/>
+        
+        <!-- Vraag preview -->
+        <Border Grid.Row="1" Background="White" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Huidige vraag:" 
+                           FontSize="12" 
+                           Foreground="#666"
+                           Margin="0 0 0 10"/>
+                <TextBlock x:Name="VraagPreview" 
+                           FontSize="18" 
+                           TextWrapping="Wrap" 
+                           Foreground="#333"
+                           LineHeight="28"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Navigatie buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 15">
+            <Button Content="◀ Vorige" 
+                    Click="Vorige_Click" 
+                    Background="#FF9800"
+                    Width="120"
+                    Margin="0 0 10 0"/>
+            <Button Content="✓ Toon Antwoord" 
+                    x:Name="ToonAntwoordBtn"
+                    Click="ToonAntwoord_Click" 
+                    Background="#4CAF50"
+                    Width="150"
+                    Margin="0 0 10 0"/>
+            <Button Content="Volgende ▶" 
+                    Click="Volgende_Click" 
+                    Background="#2196F3"
+                    Width="120"/>
+        </StackPanel>
+        
+        <!-- Status bar en terug knop -->
+        <Grid Grid.Row="3" Margin="0 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       x:Name="StatusBar"
+                       Text="Wachtend..." 
+                       FontSize="12" 
+                       Foreground="#999"
+                       TextAlignment="Center"
+                       VerticalAlignment="Center"/>
+            <Button Grid.Column="1"
+                    Content="⏹ Terug naar Hoofdscherm"
+                    Click="TerugNaarHoofdscherm_Click"
+                    Background="#E53935"
+                    Width="200"
+                    Margin="20 0 0 0"/>
+        </Grid>
+    </Grid>
+</Window>
