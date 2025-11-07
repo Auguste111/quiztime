@@ -18,7 +18,7 @@ namespace quiztime.Views
             InitializeComponent();
             try
             {
-                _jsonService = new QuizJsonService();
+                _jsonService = QuizJsonService.Instance;
                 
                 // Start het DisplayWindow bij app-start
                 if (DisplayWindow == null)

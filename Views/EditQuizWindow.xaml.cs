@@ -20,7 +20,7 @@ namespace quiztime.Views
             InitializeComponent();
             quiz = q;
             quizzen = allQuizzen;
-            _jsonService = new QuizJsonService();
+            _jsonService = QuizJsonService.Instance;
 
             NaamBox.Text = quiz.Naam;
             QuizTitelLabel.Text = $"- {quiz.Naam}";

@@ -11,8 +11,20 @@ namespace quiztime.Services
     {
         private readonly string _jsonPath;
         private List<Quiz> _quizzes;
+        
+        // Singleton instance
+        private static QuizJsonService _instance;
+        public static QuizJsonService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new QuizJsonService();
+                return _instance;
+            }
+        }
 
-        public QuizJsonService()
+        private QuizJsonService()
         {
             // Sla quizzes op in Data folder
             string dataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
