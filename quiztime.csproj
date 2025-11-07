@@ -113,7 +113,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Antwoord.cs" />
-    <Compile Include="Services\QuizDbService.cs" />
+    <Compile Include="Services\QuizJsonService.cs" />
     <Compile Include="Views\DisplayWindow.xaml.cs">
       <DependentUpon>DisplayWindow.xaml</DependentUpon>
     </Compile>
