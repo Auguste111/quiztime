@@ -53,10 +53,9 @@ namespace quiztime.Views
             isCorrectAnswerShown = false;
             UpdateToonAntwoordButton();
             
-            // Update Vorige button state
-            UpdateVorigeButtonState();
-            
-            display.StartTimer(30);
+            // Start timer met duratie van de vraag (default 30 seconden)
+            int duratie = vraag.Tijd.HasValue ? (int)vraag.Tijd.Value.TotalSeconds : 30;
+            display.StartTimer(duratie);
         }
 
         private void UpdateVorigeButtonState()

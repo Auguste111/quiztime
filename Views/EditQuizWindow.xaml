@@ -132,6 +132,9 @@
                     <StackPanel Grid.Column="0" Grid.Row="2" Margin="0 0 20 0">
                         <TextBlock Text="Vraag Tekst" Foreground="{StaticResource TextMuted}" FontWeight="SemiBold"/>
                         <TextBox x:Name="VraagTekstBox" Height="100" TextWrapping="Wrap" AcceptsReturn="True" TextChanged="VraagTekstBox_TextChanged"/>
+                        
+                        <TextBlock Text="Duratie (seconden)" Foreground="{StaticResource TextMuted}" FontWeight="SemiBold" Margin="0 15 0 5"/>
+                        <TextBox x:Name="VraagDuratieBox" Height="32" TextChanged="VraagDuratieBox_TextChanged" Padding="8"/>
                     </StackPanel>
 
                     <!-- Afbeelding zichtbaar en bewerkbaar -->

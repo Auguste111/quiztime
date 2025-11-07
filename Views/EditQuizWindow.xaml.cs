@@ -35,6 +35,17 @@ namespace quiztime.Views
             if (selectedVraag != null)
             {
                 VraagTekstBox.Text = selectedVraag.Tekst;
+                
+                // Laad duratie
+                if (selectedVraag.Tijd.HasValue)
+                {
+                    VraagDuratieBox.Text = selectedVraag.Tijd.Value.TotalSeconds.ToString("F0");
+                }
+                else
+                {
+                    VraagDuratieBox.Text = "30"; // Default 30 seconden
+                }
+                
                 AntwoordenLijst.ItemsSource = null;
                 AntwoordenLijst.ItemsSource = selectedVraag.Antwoorden;
                 
@@ -47,6 +58,7 @@ namespace quiztime.Views
             else
             {
                 VraagTekstBox.Text = "";
+                VraagDuratieBox.Text = "";
                 AntwoordenLijst.ItemsSource = null;
                 VraagAfbeeldingPreview.Source = null;
                 FotoPathLabel.Text = "Geen foto";
@@ -113,6 +125,15 @@ namespace quiztime.Views
             {
                 selectedVraag.Tekst = VraagTekstBox.Text;
                 VragenLijst.Items.Refresh();
+            }
+        }
+
+        private void VraagDuratieBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            // Update de duratie van de vraag
+            if (selectedVraag != null && int.TryParse(VraagDuratieBox.Text, out int seconds))
+            {
+                selectedVraag.Tijd = TimeSpan.FromSeconds(seconds);
             }
         }
 
