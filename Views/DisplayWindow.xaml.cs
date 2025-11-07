@@ -173,6 +173,22 @@ namespace quiztime.Views
         }
 
         /// <summary>
+        /// Toon het eindscherm - vragen gaan weg, alleen eindscherm zichtbaar
+        /// </summary>
+        public void ShowEndScreen()
+        {
+            // Maak alles leeg
+            VraagText.Text = "";
+            AntwoordLijst.ItemsSource = null;
+            VraagAfbeelding.Visibility = Visibility.Collapsed;
+            
+            // Zet eindscherm aan
+            this.IsQuizEnded = true;
+            this.IsWaiting = false;
+            this.StopTimer();
+        }
+
+        /// <summary>
         /// Start een timer voor de quizvraag
         /// </summary>
         public void StartTimer(int seconden = 30)

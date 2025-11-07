@@ -58,17 +58,15 @@ namespace quiztime.Views
         private void ToonEindscherm()
         {
             // Toon eindscherm op display (vragen gaan weg!)
-            display.StopTimer();
-            display.IsQuizEnded = true;
-            display.IsWaiting = false;
+            display.ShowEndScreen();
             
             // Zet de admin panel naar eindstatus
             VraagPreview.Text = "Quiz afgelopen!";
             
-            // Disable alle knoppen behalve "Terug naar Hoofdscherm"
+            // Disable navigatie knoppen
             VorigeBtn.IsEnabled = true;  // Terug naar vorige vragen mag nog
             VolgendeBtn.IsEnabled = false;  // Volgende mag niet meer
-            ToonAntwoordBtn.IsEnabled = false;  // Antwoord mag niet meer
+            ToonAntwoordBtn.IsEnabled = true;  // Antwoord button BLIJFT enabled (admin kan nog "Verberg Antwoord" klikken)
         }
 
         private void Volgende_Click(object sender, RoutedEventArgs e)
