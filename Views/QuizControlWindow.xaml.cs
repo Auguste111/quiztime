@@ -24,6 +24,11 @@ namespace quiztime.Views
             
             System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow gebruikt van MainWindow");
             
+            // Zorg dat alle knoppen ingeschakeld zijn aan het begin
+            VolgendeBtn.IsEnabled = true;
+            VorigeBtn.IsEnabled = false;  // Vorige is disabled totdat we voorbij vraag 1 zijn
+            ToonAntwoordBtn.IsEnabled = true;
+            
             ToonVraag();
         }
 
@@ -32,10 +37,8 @@ namespace quiztime.Views
             if (huidigeVraagIndex >= quiz.Vragen.Count)
             {
                 // Quiz is afgelopen - toon eindscherm op display
-                display.StopTimer();
-                display.IsQuizEnded = true;
-                display.IsWaiting = false;  // Zet wachtscherm uit, eindscherm aan
-                this.Close();     // Sluit alleen QuizControlWindow, terug naar MainWindow
+                // Maar sluit de window NIET - admin kan nog Terug klikken
+                ToonEindscherm();
                 return;
             }
 
@@ -52,6 +55,22 @@ namespace quiztime.Views
             display.StartTimer(30);
         }
 
+        private void ToonEindscherm()
+        {
+            // Toon eindscherm op display (vragen gaan weg!)
+            display.StopTimer();
+            display.IsQuizEnded = true;
+            display.IsWaiting = false;
+            
+            // Zet de admin panel naar eindstatus
+            VraagPreview.Text = "Quiz afgelopen!";
+            
+            // Disable alle knoppen behalve "Terug naar Hoofdscherm"
+            VorigeBtn.IsEnabled = true;  // Terug naar vorige vragen mag nog
+            VolgendeBtn.IsEnabled = false;  // Volgende mag niet meer
+            ToonAntwoordBtn.IsEnabled = false;  // Antwoord mag niet meer
+        }
+
         private void Volgende_Click(object sender, RoutedEventArgs e)
         {
             display.StopTimer();
@@ -64,6 +83,15 @@ namespace quiztime.Views
             display.StopTimer();
             if (huidigeVraagIndex > 0)
                 huidigeVraagIndex--;
+            
+            // Als we teruggaan naar vorige vragen vanuit eindscherm
+            // Dan moeten alle knoppen weer ingeschakeld
+            if (VolgendeBtn.IsEnabled == false)
+            {
+                VolgendeBtn.IsEnabled = true;
+                ToonAntwoordBtn.IsEnabled = true;
+            }
+            
             ToonVraag();
         }
 
