@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -277,6 +278,16 @@ namespace quiztime.Views
             }
 
             quiz.Naam = NaamBox.Text;
+            
+            // Validatie: zorg dat elke vraag minstens 1 correct antwoord heeft
+            foreach (var vraag in quiz.Vragen)
+            {
+                if (!vraag.Antwoorden.Any(a => a.IsCorrect))
+                {
+                    MessageBox.Show($"Vraag '{vraag.Tekst}' moet minstens 1 correct antwoord hebben!");
+                    return;
+                }
+            }
             
             try
             {
