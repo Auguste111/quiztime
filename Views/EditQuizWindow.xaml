@@ -66,7 +66,7 @@
         <Grid Margin="30 20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="320"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" MinWidth="600"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -154,34 +154,36 @@
                 <StackPanel>
                     <TextBlock Text="Antwoorden" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Primary}" Margin="0 0 0 15"/>
 
-                    <ListBox x:Name="AntwoordenLijst" Background="Transparent" BorderThickness="0">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Border Background="#F9FAFB" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10" Margin="8" Padding="10">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="40"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBox Text="{Binding Tekst, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="0 0 8 0" Height="36"/>
-                                        <CheckBox Grid.Column="1" IsChecked="{Binding IsCorrect}" VerticalAlignment="Center"/>
-                                        <Button Content="✕" Grid.Column="2" Height="30" Width="30" Background="{StaticResource Danger}" Click="RemoveAntwoord_Click" Tag="{Binding Id}"/>
-                                    </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                        <ListBox x:Name="AntwoordenLijst" Background="Transparent" BorderThickness="0">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="2"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F9FAFB" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10" Margin="8" Padding="10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="40"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Text="{Binding Tekst, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="0 0 8 0" Height="36"/>
+                                            <CheckBox Grid.Column="1" IsChecked="{Binding IsCorrect}" VerticalAlignment="Center"/>
+                                            <Button Content="✕" Grid.Column="2" Height="30" Width="30" Background="{StaticResource Danger}" Click="RemoveAntwoord_Click" Tag="{Binding Id}"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
 
                     <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10" Background="#F9FAFB" Margin="0 20 0 0" Padding="10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" MinWidth="200"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
