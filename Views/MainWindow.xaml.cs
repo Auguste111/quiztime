@@ -25,6 +25,14 @@ namespace quiztime.Views
                     DisplayWindow = new DisplayWindow();
                     DisplayWindow.InitializeDisplayOnAllScreens();
                     DisplayWindow.Show();
+                    
+                    // Na Show(), maximaliseer het venster
+                    var screens = System.Windows.Forms.Screen.AllScreens;
+                    if (screens.Length > 1)
+                    {
+                        DisplayWindow.WindowState = System.Windows.WindowState.Maximized;
+                        System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd bij startup");
+                    }
                 }
                 
                 LoadQuizzes();
