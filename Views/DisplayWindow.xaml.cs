@@ -27,7 +27,7 @@ namespace quiztime.Views
             {
                 return new SolidColorBrush(Color.FromRgb(76, 175, 80)); // Groen (#4CAF50)
             }
-            return new SolidColorBrush(Color.FromRgb(22, 33, 62)); // Originele donkerblauwe kleur (#16213E)
+            return new SolidColorBrush(Color.FromRgb(22, 33, 62)); // donkerblauwe (#16213E)
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
@@ -252,11 +252,11 @@ namespace quiztime.Views
         }
 
         /// <summary>
-        /// Internal: deze methode is nu niet meer nodig
+        /// verberg het juiste antwoord bij muisklik
         /// </summary>
         private void HideCorrectAnswer_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Niet meer nodig
+
         }
     }
 }

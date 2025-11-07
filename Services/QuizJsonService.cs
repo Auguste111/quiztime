@@ -32,7 +32,7 @@ namespace quiztime.Services
                 Directory.CreateDirectory(dataFolder);
 
             _jsonPath = Path.Combine(dataFolder, "quizzes.json");
-            System.Diagnostics.Debug.WriteLine($"📁 JSON pad: {_jsonPath}");
+            System.Diagnostics.Debug.WriteLine($" JSON pad: {_jsonPath}");
 
             // Laad quizzes uit JSON
             LoadFromJson();
@@ -49,18 +49,18 @@ namespace quiztime.Services
                 {
                     string json = File.ReadAllText(_jsonPath);
                     _quizzes = JsonConvert.DeserializeObject<List<Quiz>>(json) ?? new List<Quiz>();
-                    System.Diagnostics.Debug.WriteLine($"✅ {_quizzes.Count} quizzes geladen uit JSON");
+                    System.Diagnostics.Debug.WriteLine($" {_quizzes.Count} quizzes geladen uit JSON");
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"❌ Fout bij laden JSON: {ex.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Fout bij laden JSON: {ex.Message}");
                     _quizzes = new List<Quiz>();
                 }
             }
             else
             {
                 _quizzes = new List<Quiz>();
-                System.Diagnostics.Debug.WriteLine($"⚠️ JSON bestand niet gevonden, nieuwe lijst aangemaakt");
+                System.Diagnostics.Debug.WriteLine($"JSON bestand niet gevonden, nieuwe lijst aangemaakt");
             }
         }
 
@@ -73,11 +73,11 @@ namespace quiztime.Services
             {
                 string json = JsonConvert.SerializeObject(_quizzes, Formatting.Indented);
                 File.WriteAllText(_jsonPath, json);
-                System.Diagnostics.Debug.WriteLine($"✅ {_quizzes.Count} quizzes opgeslagen naar JSON");
+                System.Diagnostics.Debug.WriteLine($" {_quizzes.Count} quizzes opgeslagen naar JSON");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"❌ Fout bij opslaan JSON: {ex.Message}");
+                System.Diagnostics.Debug.WriteLine($"Fout bij opslaan JSON: {ex.Message}");
             }
         }
 
@@ -107,7 +107,7 @@ namespace quiztime.Services
                 // Nieuwe quiz: genereer ID
                 quiz.Id = _quizzes.Any() ? _quizzes.Max(q => q.Id) + 1 : 1;
                 _quizzes.Add(quiz);
-                System.Diagnostics.Debug.WriteLine($"✅ Nieuwe quiz '{quiz.Naam}' toegevoegd met ID {quiz.Id}");
+                System.Diagnostics.Debug.WriteLine($" Nieuwe quiz '{quiz.Naam}' toegevoegd met ID {quiz.Id}");
             }
             else
             {
@@ -118,7 +118,7 @@ namespace quiztime.Services
                     existing.Naam = quiz.Naam;
                     existing.Description = quiz.Description;
                     existing.Vragen = quiz.Vragen;
-                    System.Diagnostics.Debug.WriteLine($"✅ Quiz '{quiz.Naam}' (ID {quiz.Id}) bijgewerkt");
+                    System.Diagnostics.Debug.WriteLine($" Quiz '{quiz.Naam}' (ID {quiz.Id}) bijgewerkt");
                 }
             }
 
@@ -135,7 +135,7 @@ namespace quiztime.Services
             {
                 _quizzes.Remove(quiz);
                 SaveToJson();
-                System.Diagnostics.Debug.WriteLine($"✅ Quiz '{quiz.Naam}' (ID {id}) verwijderd");
+                System.Diagnostics.Debug.WriteLine($" Quiz '{quiz.Naam}' (ID {id}) verwijderd");
             }
         }
     }

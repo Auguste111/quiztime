@@ -134,7 +134,7 @@ namespace quiztime.Views
                     new Antwoord { Tekst = "Antwoord B", IsCorrect = true }
                 },
                 CreatedAt = DateTime.Now,
-                Id = 0  // Markeert als nieuw
+                Id = 0  
             };
 
             quiz.Vragen.Add(vraag);
@@ -165,7 +165,6 @@ namespace quiztime.Views
                 return;
             }
 
-            // Disable als we al 4 antwoorden hebben, anders enable
             addButton.IsEnabled = selectedVraag.Antwoorden.Count < 4;
             
             System.Diagnostics.Debug.WriteLine($"AddAntwoordBtn IsEnabled = {addButton.IsEnabled} (Antwoorden: {selectedVraag.Antwoorden.Count}/4)");
@@ -185,7 +184,6 @@ namespace quiztime.Views
                 return;
             }
 
-            // Check of we al 4 antwoorden hebben
             if (selectedVraag.Antwoorden.Count >= 4)
             {
                 MessageBox.Show("Maximum 4 antwoorden per vraag!");
@@ -214,7 +212,6 @@ namespace quiztime.Views
 
         private void NieuwAntwoordBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            // Toevoegen met Enter-toets
             if (e.Key == System.Windows.Input.Key.Return)
             {
                 AddAntwoord_Click(null, null);
@@ -243,9 +240,7 @@ namespace quiztime.Views
 
         private void Answer_CorrectChanged(object sender, RoutedEventArgs e)
         {
-            // Checkbox event - niets extra nodig
-            // De IsCorrect binding werkt direct met de Antwoord object
-            // Meerdere antwoorden kunnen tegelijk goed zijn
+
             if (selectedVraag != null)
             {
                 AntwoordenLijst.Items.Refresh();
