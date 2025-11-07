@@ -94,7 +94,7 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0 0 0 30">
-            <TextBlock Text="🎯 Quiztime" 
+            <TextBlock Text="Quiztime" 
                        FontSize="42" 
                        FontWeight="Bold" 
                        Foreground="#8E5572"
@@ -122,7 +122,7 @@
 
             <!-- Linker: Quiz List -->
             <StackPanel Grid.Column="0" Margin="0 0 30 0">
-                <TextBlock Text="📋 Beschikbare Quizzen" 
+                <TextBlock Text="Beschikbare Quizzen" 
                            FontSize="20" 
                            FontWeight="Bold" 
                            Foreground="#88665D"
@@ -135,14 +135,14 @@
 
             <!-- Rechter: Action buttons -->
             <StackPanel Grid.Column="1">
-                <TextBlock Text="⚙️ Acties" 
+                <TextBlock Text="Acties" 
                            FontSize="20" 
                            FontWeight="Bold" 
                            Foreground="#88665D"
                            Margin="0 0 0 15"/>
                 
                 <!-- Quiz starten button (groot) -->
-                <Button Content="▶ START QUIZ" 
+                <Button Content="START QUIZ" 
                         Click="StartQuiz_Click" 
                         Style="{StaticResource PrimaryButton}"
                         FontSize="16"
@@ -152,20 +152,20 @@
                         Background="#8E5572"/>
                 
                 <!-- Andere acties buttons -->
-                <Button Content="✏️ Bewerk Quiz" 
+                <Button Content="Bewerk Quiz" 
                         Click="EditQuiz_Click" 
                         Style="{StaticResource SecondaryButton}"
                         Margin="0 0 0 8"
                         Height="45"/>
                 
-                <Button Content="🗑️ Verwijder Quiz" 
+                <Button Content="Verwijder Quiz" 
                         Click="DeleteQuiz_Click" 
                         Style="{StaticResource SecondaryButton}"
                         Background="#88665D"
                         Margin="0 0 0 8"
                         Height="45"/>
                 
-                <Button Content="➕ Nieuwe Quiz" 
+                <Button Content="Nieuwe Quiz" 
                         Click="NewQuiz_Click" 
                         Style="{StaticResource SecondaryButton}"
                         Background="#BCAA99"
