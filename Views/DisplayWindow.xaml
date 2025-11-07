@@ -60,7 +60,7 @@
                                Margin="0 0 0 10"/>
                     <!-- Foto - responsive sizing -->
                     <Image x:Name="VraagAfbeelding"
-                           MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=ActualWidth, StringFormat='{0:F0}', Converter={StaticResource WidthConverter}}"
+                           MaxWidth="800"
                            MaxHeight="280"
                            Stretch="Uniform"
                            Margin="0 0 0 0"
