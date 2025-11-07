@@ -26,9 +26,10 @@ namespace quiztime.Views
             
             // Zorg dat alle knoppen ingeschakeld zijn aan het begin
             VolgendeBtn.IsEnabled = true;
-            VorigeBtn.IsEnabled = false;  // Vorige is disabled totdat we voorbij vraag 1 zijn
+            VorigeBtn.IsEnabled = true;  // Vorige is altijd enabled (behalve op eerste vraag)
             ToonAntwoordBtn.IsEnabled = true;
             
+            UpdateVorigeButtonState();
             ToonVraag();
         }
 
@@ -52,7 +53,16 @@ namespace quiztime.Views
             isCorrectAnswerShown = false;
             UpdateToonAntwoordButton();
             
+            // Update Vorige button state
+            UpdateVorigeButtonState();
+            
             display.StartTimer(30);
+        }
+
+        private void UpdateVorigeButtonState()
+        {
+            // Vorige is disabled als we op de eerste vraag zijn
+            VorigeBtn.IsEnabled = huidigeVraagIndex > 0;
         }
 
         private void ToonEindscherm()
@@ -80,7 +90,9 @@ namespace quiztime.Views
         {
             display.StopTimer();
             if (huidigeVraagIndex > 0)
+            {
                 huidigeVraagIndex--;
+            }
             
             // Als we teruggaan naar vorige vragen vanuit eindscherm
             // Dan moeten alle knoppen weer ingeschakeld
