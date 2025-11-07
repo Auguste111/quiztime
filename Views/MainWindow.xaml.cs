@@ -10,6 +10,7 @@ namespace quiztime.Views
     {
         private List<Quiz> quizzen;
         private readonly QuizDbService _dbService;
+        public static DisplayWindow DisplayWindow { get; private set; }
 
         public MainWindow()
         {
@@ -17,6 +18,15 @@ namespace quiztime.Views
             try
             {
                 _dbService = new QuizDbService();
+                
+                // Start het DisplayWindow bij app-start
+                if (DisplayWindow == null)
+                {
+                    DisplayWindow = new DisplayWindow();
+                    DisplayWindow.InitializeDisplayOnAllScreens();
+                    DisplayWindow.Show();
+                }
+                
                 LoadQuizzes();
             }
             catch (Exception ex)

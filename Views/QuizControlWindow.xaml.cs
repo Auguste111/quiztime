@@ -19,57 +19,10 @@ namespace quiztime.Views
             System.Diagnostics.Debug.WriteLine($"QuizControlWindow geopend: {quiz.Naam}");
             System.Diagnostics.Debug.WriteLine($"Aantal vragen in quiz: {quiz.Vragen.Count}");
 
-            // Publieksscherm openen
-            display = new DisplayWindow();
-
-            // Probeer tweede scherm te vinden
-            var screens = Screen.AllScreens;
-            System.Diagnostics.Debug.WriteLine($"🖥️ Aantal schermen gevonden: {screens.Length}");
+            // Gebruik het bestaande DisplayWindow van MainWindow
+            display = MainWindow.DisplayWindow;
             
-            foreach (var i in Enumerable.Range(0, screens.Length))
-            {
-                System.Diagnostics.Debug.WriteLine($"   Scherm {i}: {screens[i].DeviceName} (Primair: {screens[i].Primary})");
-            }
-
-            if (screens.Length > 1)
-            {
-                // Pak het NIET-primaire scherm (tweede scherm)
-                var secondScreen = screens.FirstOrDefault(s => !s.Primary);
-                if (secondScreen == null)
-                    secondScreen = screens[1];
-                
-                var workingArea = secondScreen.WorkingArea;
-                display.WindowStartupLocation = WindowStartupLocation.Manual;
-                display.Left = workingArea.Left;
-                display.Top = workingArea.Top;
-                display.Width = workingArea.Width;
-                display.Height = workingArea.Height;
-                // Niet maximized, zodat je kan slepen
-                
-                System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow op tweede scherm: {secondScreen.DeviceName}");
-            }
-            else
-            {
-                // Als er maar 1 scherm is: toon als apart venster
-                display.WindowStartupLocation = WindowStartupLocation.Manual;
-                var primaryScreen = screens[0].WorkingArea;
-                
-                display.Left = primaryScreen.Left + 600;
-                display.Top = primaryScreen.Top;
-                display.Width = primaryScreen.Width - 600;
-                display.Height = primaryScreen.Height;
-                
-                System.Diagnostics.Debug.WriteLine($"⚠️ Slechts 1 scherm, DisplayWindow rechts gepositioneerd");
-            }
-
-            display.Show();
-            
-            // Na Show(), maximaliseer het venster op het scherm waar het staat
-            if (screens.Length > 1)
-            {
-                display.WindowState = System.Windows.WindowState.Maximized;
-                System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd op tweede scherm");
-            }
+            System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow gebruikt van MainWindow");
             
             ToonVraag();
         }
@@ -78,10 +31,10 @@ namespace quiztime.Views
         {
             if (huidigeVraagIndex >= quiz.Vragen.Count)
             {
-                // Quiz is afgelopen - sluit stiekem zonder melding
+                // Quiz is afgelopen - zet het wachtscherm weer aan
                 display.StopTimer();
-                display.Close();  // Sluit het DisplayWindow
-                this.Close();     // Sluit QuizControlWindow en terug naar MainWindow
+                display.IsWaiting = true;
+                this.Close();     // Sluit alleen QuizControlWindow, terug naar MainWindow
                 return;
             }
 
@@ -158,8 +111,8 @@ namespace quiztime.Views
         private void TerugNaarHoofdscherm_Click(object sender, RoutedEventArgs e)
         {
             display.StopTimer();
-            display.Close();  // Sluit het DisplayWindow
-            this.Close();     // Sluit QuizControlWindow en terug naar MainWindow
+            display.IsWaiting = true;  // Zet het wachtscherm weer aan
+            this.Close();     // Sluit QuizControlWindow, DisplayWindow blijft open
         }
     }
 }

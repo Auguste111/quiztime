@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -39,16 +40,71 @@ namespace quiztime.Views
         private DispatcherTimer timer;
         private int tijdOver = 30;
         private bool showCorrectAnswer = false;
+        private bool isWaiting = true;
+
         public bool IsShowingCorrectAnswer
         {
             get { return showCorrectAnswer; }
             set { showCorrectAnswer = value; }
         }
 
+        public bool IsWaiting
+        {
+            get { return isWaiting; }
+            set { isWaiting = value; }
+        }
+
         public DisplayWindow()
         {
             InitializeComponent();
             this.DataContext = this;
+            this.IsWaiting = true;
+        }
+
+        /// <summary>
+        /// Positioneer het DisplayWindow op het juiste scherm
+        /// </summary>
+        public void InitializeDisplayOnAllScreens()
+        {
+            var screens = System.Windows.Forms.Screen.AllScreens;
+            System.Diagnostics.Debug.WriteLine($"🖥️ Aantal schermen: {screens.Length}");
+
+            if (screens.Length > 1)
+            {
+                // Pak het NIET-primaire scherm (tweede scherm)
+                var secondScreen = screens.FirstOrDefault(s => !s.Primary);
+                if (secondScreen == null)
+                    secondScreen = screens[1];
+
+                var workingArea = secondScreen.WorkingArea;
+                this.WindowStartupLocation = WindowStartupLocation.Manual;
+                this.Left = workingArea.Left;
+                this.Top = workingArea.Top;
+                this.Width = workingArea.Width;
+                this.Height = workingArea.Height;
+
+                System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow op tweede scherm: {secondScreen.DeviceName}");
+            }
+            else
+            {
+                // Als er maar 1 scherm is: toon als apart venster
+                this.WindowStartupLocation = WindowStartupLocation.Manual;
+                var primaryScreen = screens[0].WorkingArea;
+
+                this.Left = primaryScreen.Left + 600;
+                this.Top = primaryScreen.Top;
+                this.Width = primaryScreen.Width - 600;
+                this.Height = primaryScreen.Height;
+
+                System.Diagnostics.Debug.WriteLine($"⚠️ Slechts 1 scherm, DisplayWindow rechts gepositioneerd");
+            }
+
+            // Na positioning, maximaliseer het venster
+            if (screens.Length > 1)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+                System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd op tweede scherm");
+            }
         }
 
         /// <summary>
@@ -58,6 +114,7 @@ namespace quiztime.Views
         {
             // Reset de correct answer flag voor een nieuwe vraag
             this.IsShowingCorrectAnswer = false;
+            this.IsWaiting = false;
             
             VraagText.Text = vraag.Tekst;
             AntwoordLijst.ItemsSource = vraag.Antwoorden;
