@@ -31,9 +31,10 @@ namespace quiztime.Views
         {
             if (huidigeVraagIndex >= quiz.Vragen.Count)
             {
-                // Quiz is afgelopen - zet het wachtscherm weer aan
+                // Quiz is afgelopen - toon eindscherm op display
                 display.StopTimer();
-                display.IsWaiting = true;
+                display.IsQuizEnded = true;
+                display.IsWaiting = false;  // Zet wachtscherm uit, eindscherm aan
                 this.Close();     // Sluit alleen QuizControlWindow, terug naar MainWindow
                 return;
             }
@@ -111,7 +112,8 @@ namespace quiztime.Views
         private void TerugNaarHoofdscherm_Click(object sender, RoutedEventArgs e)
         {
             display.StopTimer();
-            display.IsWaiting = true;  // Zet het wachtscherm weer aan
+            display.IsQuizEnded = false;  // Reset eindscherm
+            display.IsWaiting = true;     // Zet wachtscherm weer aan
             this.Close();     // Sluit QuizControlWindow, DisplayWindow blijft open
         }
     }

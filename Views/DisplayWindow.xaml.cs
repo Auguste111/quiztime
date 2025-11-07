@@ -42,6 +42,7 @@ namespace quiztime.Views
         private int tijdOver = 30;
         private bool showCorrectAnswer = false;
         private bool isWaiting = true;
+        private bool isQuizEnded = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -77,11 +78,26 @@ namespace quiztime.Views
             }
         }
 
+        public bool IsQuizEnded
+        {
+            get { return isQuizEnded; }
+            set 
+            { 
+                if (isQuizEnded != value)
+                {
+                    isQuizEnded = value;
+                    OnPropertyChanged(nameof(IsQuizEnded));
+                    System.Diagnostics.Debug.WriteLine($"🎉 IsQuizEnded = {value}");
+                }
+            }
+        }
+
         public DisplayWindow()
         {
             InitializeComponent();
             this.DataContext = this;
             this.IsWaiting = true;
+            this.IsQuizEnded = false;
         }
 
         /// <summary>
@@ -131,6 +147,7 @@ namespace quiztime.Views
             // Reset de correct answer flag voor een nieuwe vraag
             this.IsShowingCorrectAnswer = false;
             this.IsWaiting = false;
+            this.IsQuizEnded = false;  // Reset eindscherm
             
             VraagText.Text = vraag.Tekst;
             AntwoordLijst.ItemsSource = vraag.Antwoorden;
