@@ -149,6 +149,10 @@ namespace quiztime.Views
         private void TerugNaarHoofdscherm_Click(object sender, RoutedEventArgs e)
         {
             display.StopTimer();
+            
+            // Clear all content on display
+            display.ClearDisplay();
+            
             display.IsQuizEnded = false;  // Reset eindscherm
             display.IsWaiting = true;     // Zet wachtscherm weer aan
             this.Close();     // Sluit QuizControlWindow, DisplayWindow blijft open

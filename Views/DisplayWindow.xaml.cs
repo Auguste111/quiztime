@@ -189,6 +189,26 @@ namespace quiztime.Views
         }
 
         /// <summary>
+        /// Clear all content and reset to waiting screen
+        /// </summary>
+        public void ClearDisplay()
+        {
+            // Stop timer
+            StopTimer();
+            
+            // Clear all content
+            VraagText.Text = "";
+            AntwoordLijst.ItemsSource = null;
+            VraagAfbeelding.Visibility = Visibility.Collapsed;
+            TimerLabel.Text = "";
+            
+            // Reset states
+            this.IsShowingCorrectAnswer = false;
+            this.IsQuizEnded = false;
+            this.IsWaiting = true;
+        }
+
+        /// <summary>
         /// Start een timer voor de quizvraag
         /// </summary>
         public void StartTimer(int seconden = 30)
