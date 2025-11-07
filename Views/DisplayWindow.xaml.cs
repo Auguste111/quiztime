@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
@@ -35,23 +36,45 @@ namespace quiztime.Views
         }
     }
 
-    public partial class DisplayWindow : Window
+    public partial class DisplayWindow : Window, INotifyPropertyChanged
     {
         private DispatcherTimer timer;
         private int tijdOver = 30;
         private bool showCorrectAnswer = false;
         private bool isWaiting = true;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public bool IsShowingCorrectAnswer
         {
             get { return showCorrectAnswer; }
-            set { showCorrectAnswer = value; }
+            set 
+            { 
+                if (showCorrectAnswer != value)
+                {
+                    showCorrectAnswer = value;
+                    OnPropertyChanged(nameof(IsShowingCorrectAnswer));
+                }
+            }
         }
 
         public bool IsWaiting
         {
             get { return isWaiting; }
-            set { isWaiting = value; }
+            set 
+            { 
+                if (isWaiting != value)
+                {
+                    isWaiting = value;
+                    OnPropertyChanged(nameof(IsWaiting));
+                    System.Diagnostics.Debug.WriteLine($"🔄 IsWaiting = {value}");
+                }
+            }
         }
 
         public DisplayWindow()
