@@ -63,10 +63,10 @@ namespace quiztime.Views
             // Zet de admin panel naar eindstatus
             VraagPreview.Text = "Quiz afgelopen!";
             
-            // Disable navigatie knoppen
+            // Disable alle knoppen behalve Terug
             VorigeBtn.IsEnabled = true;  // Terug naar vorige vragen mag nog
             VolgendeBtn.IsEnabled = false;  // Volgende mag niet meer
-            ToonAntwoordBtn.IsEnabled = true;  // Antwoord button BLIJFT enabled (admin kan nog "Verberg Antwoord" klikken)
+            ToonAntwoordBtn.IsEnabled = false;  // Antwoord mag niet meer
         }
 
         private void Volgende_Click(object sender, RoutedEventArgs e)
