@@ -12,7 +12,7 @@ namespace quiztime.Views
     {
         private Quiz quiz;
         private List<Quiz> quizzen;
-        private readonly QuizDbService _dbService;
+        private readonly QuizJsonService _jsonService;
         private Vraag selectedVraag;
 
         public EditQuizWindow(Quiz q, List<Quiz> allQuizzen)
@@ -20,7 +20,7 @@ namespace quiztime.Views
             InitializeComponent();
             quiz = q;
             quizzen = allQuizzen;
-            _dbService = new QuizDbService();
+            _jsonService = new QuizJsonService();
 
             NaamBox.Text = quiz.Naam;
             QuizTitelLabel.Text = $"- {quiz.Naam}";
@@ -141,20 +141,6 @@ namespace quiztime.Views
         {
             if (VragenLijst.SelectedItem is Vraag v)
             {
-                // Als de vraag al in de database staat, verwijder het daar ook
-                if (v.Id != 0)
-                {
-                    try
-                    {
-                        _dbService.DeleteQuestion(v.Id);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Fout bij verwijderen van vraag: {ex.Message}");
-                        return;
-                    }
-                }
-
                 quiz.Vragen.Remove(v);
                 VragenLijst.Items.Refresh();
                 VraagTekstBox.Text = "";
@@ -215,20 +201,6 @@ namespace quiztime.Views
                 return;
             }
 
-            // Als het antwoord al in de database staat, verwijder het daar ook
-            if (antwoord.Id != 0)
-            {
-                try
-                {
-                    _dbService.DeleteAnswer(antwoord.Id);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Fout bij verwijderen van antwoord: {ex.Message}");
-                    return;
-                }
-            }
-
             selectedVraag.Antwoorden.Remove(antwoord);
             AntwoordenLijst.Items.Refresh();
         }
@@ -256,8 +228,8 @@ namespace quiztime.Views
             
             try
             {
-                // Sla alles op in de database
-                _dbService.UpdateQuiz(quiz);
+                // Sla alles op in JSON
+                _jsonService.UpdateQuiz(quiz);
                 MessageBox.Show("Quiz succesvol opgeslagen!");
                 Close();
             }

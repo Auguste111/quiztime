@@ -1,0 +1,36 @@
+[
+  {
+    "Id": 1,
+    "Naam": "Algemene Kennis",
+    "Description": "Test je kennis over diverse onderwerpen",
+    "Vragen": [
+      {
+        "Id": 1,
+        "Tekst": "Wat is de hoofdstad van Frankrijk?",
+        "FotoPath": null,
+        "Antwoorden": [
+          {
+            "Id": 1,
+            "Tekst": "Parijs",
+            "IsCorrect": true
+          },
+          {
+            "Id": 2,
+            "Tekst": "Marseille",
+            "IsCorrect": false
+          },
+          {
+            "Id": 3,
+            "Tekst": "Lyon",
+            "IsCorrect": false
+          },
+          {
+            "Id": 4,
+            "Tekst": "Toulouse",
+            "IsCorrect": false
+          }
+        ]
+      }
+    ]
+  }
+]

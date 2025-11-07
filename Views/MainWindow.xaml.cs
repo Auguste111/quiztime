@@ -10,7 +10,7 @@ namespace quiztime.Views
     public partial class MainWindow : Window
     {
         private List<Quiz> quizzen;
-        private readonly QuizDbService _dbService;
+        private readonly QuizJsonService _jsonService;
         public static DisplayWindow DisplayWindow { get; private set; }
 
         public MainWindow()
@@ -18,7 +18,7 @@ namespace quiztime.Views
             InitializeComponent();
             try
             {
-                _dbService = new QuizDbService();
+                _jsonService = new QuizJsonService();
                 
                 // Start het DisplayWindow bij app-start
                 if (DisplayWindow == null)
@@ -52,13 +52,13 @@ namespace quiztime.Views
         {
             try
             {
-                quizzen = _dbService.GetAllQuizzes();
+                quizzen = _jsonService.GetAllQuizzes();
                 QuizList.ItemsSource = quizzen;
                 System.Diagnostics.Debug.WriteLine($"✅ {quizzen.Count} quizzen geladen");
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Fout bij het laden van quizzen: {ex.Message}\n\n{ex.StackTrace}", "Database Fout");
+                System.Windows.MessageBox.Show($"Fout bij het laden van quizzen: {ex.Message}\n\n{ex.StackTrace}", "Fout");
                 System.Diagnostics.Debug.WriteLine($"❌ Fout: {ex}");
             }
         }
@@ -124,7 +124,7 @@ namespace quiztime.Views
 
             if (confirm == System.Windows.MessageBoxResult.Yes)
             {
-                _dbService.DeleteQuiz(SelectedQuiz.Id);
+                _jsonService.DeleteQuiz(SelectedQuiz.Id);
                 quizzen.Remove(SelectedQuiz);
                 QuizList.Items.Refresh();
             }
