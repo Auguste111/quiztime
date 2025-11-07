@@ -60,8 +60,8 @@ namespace quiztime.Views
 
         private void UpdateVorigeButtonState()
         {
-            // Vorige is disabled als we op de eerste vraag zijn
-            VorigeBtn.IsEnabled = huidigeVraagIndex > 0;
+            // Vorige is altijd beschikbaar
+            VorigeBtn.IsEnabled = true;
         }
 
         private void ToonEindscherm()
