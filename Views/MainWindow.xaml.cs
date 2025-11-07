@@ -35,7 +35,7 @@ namespace quiztime.Views
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             DisplayWindow.WindowState = System.Windows.WindowState.Maximized;
-                            System.Diagnostics.Debug.WriteLine($"📺 DisplayWindow gemaximaliseerd bij startup op scherm: {screens[1].DeviceName}");
+                            System.Diagnostics.Debug.WriteLine($"DisplayWindow gemaximaliseerd bij startup op scherm: {screens[1].DeviceName}");
                         }), System.Windows.Threading.DispatcherPriority.Background);
                     }
                 }
@@ -54,12 +54,12 @@ namespace quiztime.Views
             {
                 quizzen = _jsonService.GetAllQuizzes();
                 QuizList.ItemsSource = quizzen;
-                System.Diagnostics.Debug.WriteLine($"✅ {quizzen.Count} quizzen geladen");
+                System.Diagnostics.Debug.WriteLine($"{quizzen.Count} quizzen geladen");
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show($"Fout bij het laden van quizzen: {ex.Message}\n\n{ex.StackTrace}", "Fout");
-                System.Diagnostics.Debug.WriteLine($"❌ Fout: {ex}");
+                System.Diagnostics.Debug.WriteLine($"Fout: {ex}");
             }
         }
 

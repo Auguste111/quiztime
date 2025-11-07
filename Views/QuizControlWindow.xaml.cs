@@ -22,7 +22,7 @@ namespace quiztime.Views
             // Gebruik het bestaande DisplayWindow van MainWindow
             display = MainWindow.DisplayWindow;
             
-            System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow gebruikt van MainWindow");
+            System.Diagnostics.Debug.WriteLine($"DisplayWindow gebruikt van MainWindow");
             
             // Zorg dat alle knoppen ingeschakeld zijn aan het begin
             VolgendeBtn.IsEnabled = true;
@@ -125,12 +125,12 @@ namespace quiztime.Views
         {
             if (isCorrectAnswerShown)
             {
-                ToonAntwoordBtn.Content = "✗ Verberg Antwoord";
+                ToonAntwoordBtn.Content = "X Verberg Antwoord";
                 ToonAntwoordBtn.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(244, 67, 54)); // Rood
             }
             else
             {
-                ToonAntwoordBtn.Content = "✓ Toon Antwoord";
+                ToonAntwoordBtn.Content = "Toon Antwoord";
                 ToonAntwoordBtn.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(76, 175, 80)); // Groen
             }
         }

@@ -73,7 +73,7 @@ namespace quiztime.Views
                 {
                     isWaiting = value;
                     OnPropertyChanged(nameof(IsWaiting));
-                    System.Diagnostics.Debug.WriteLine($"🔄 IsWaiting = {value}");
+                    System.Diagnostics.Debug.WriteLine($"IsWaiting = {value}");
                 }
             }
         }
@@ -87,7 +87,7 @@ namespace quiztime.Views
                 {
                     isQuizEnded = value;
                     OnPropertyChanged(nameof(IsQuizEnded));
-                    System.Diagnostics.Debug.WriteLine($"🎉 IsQuizEnded = {value}");
+                    System.Diagnostics.Debug.WriteLine($"IsQuizEnded = {value}");
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace quiztime.Views
         public void InitializeDisplayOnAllScreens()
         {
             var screens = System.Windows.Forms.Screen.AllScreens;
-            System.Diagnostics.Debug.WriteLine($"🖥️ Aantal schermen: {screens.Length}");
+            System.Diagnostics.Debug.WriteLine($"Aantal schermen: {screens.Length}");
 
             if (screens.Length > 1)
             {
@@ -122,7 +122,7 @@ namespace quiztime.Views
                 this.Width = workingArea.Width;
                 this.Height = workingArea.Height;
 
-                System.Diagnostics.Debug.WriteLine($"✅ DisplayWindow op tweede scherm: {secondScreen.DeviceName} ({workingArea.Left}, {workingArea.Top}, {workingArea.Width}x{workingArea.Height})");
+                    System.Diagnostics.Debug.WriteLine($"DisplayWindow op tweede scherm: {secondScreen.DeviceName} ({workingArea.Left}, {workingArea.Top}, {workingArea.Width}x{workingArea.Height})");
             }
             else
             {
@@ -135,7 +135,7 @@ namespace quiztime.Views
                 this.Width = primaryScreen.Width - 600;
                 this.Height = primaryScreen.Height;
 
-                System.Diagnostics.Debug.WriteLine($"⚠️ Slechts 1 scherm, DisplayWindow rechts gepositioneerd");
+                System.Diagnostics.Debug.WriteLine($"Slechts 1 scherm, DisplayWindow rechts gepositioneerd");
             }
         }
 
@@ -194,7 +194,7 @@ namespace quiztime.Views
         public void StartTimer(int seconden = 30)
         {
             tijdOver = seconden;
-            TimerLabel.Text = $"⏳ {tijdOver}s";
+            TimerLabel.Text = $" {tijdOver}s";
 
             // Stop een eventuele oude timer
             if (timer != null)
@@ -205,12 +205,12 @@ namespace quiztime.Views
             timer.Tick += (s, e) =>
             {
                 tijdOver--;
-                TimerLabel.Text = $"⏳ {tijdOver}s";
+                TimerLabel.Text = $" {tijdOver}s";
 
                 if (tijdOver <= 0)
                 {
                     timer.Stop();
-                    TimerLabel.Text = "⏰ Tijd is op!";
+                    TimerLabel.Text = " Tijd is op!";
                 }
             };
             timer.Start();

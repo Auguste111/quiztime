@@ -168,7 +168,7 @@ namespace quiztime.Views
             // Disable als we al 4 antwoorden hebben, anders enable
             addButton.IsEnabled = selectedVraag.Antwoorden.Count < 4;
             
-            System.Diagnostics.Debug.WriteLine($"🔘 AddAntwoordBtn IsEnabled = {addButton.IsEnabled} (Antwoorden: {selectedVraag.Antwoorden.Count}/4)");
+            System.Diagnostics.Debug.WriteLine($"AddAntwoordBtn IsEnabled = {addButton.IsEnabled} (Antwoorden: {selectedVraag.Antwoorden.Count}/4)");
         }
 
         private void AddAntwoord_Click(object sender, RoutedEventArgs e)
@@ -209,7 +209,7 @@ namespace quiztime.Views
             // Update de knop status
             UpdateAddAntwoordButtonState();
             
-            System.Diagnostics.Debug.WriteLine($"✅ Antwoord toegevoegd: '{antwoord.Tekst}' (Correct: {antwoord.IsCorrect})");
+            System.Diagnostics.Debug.WriteLine($"Antwoord toegevoegd: '{antwoord.Tekst}' (Correct: {antwoord.IsCorrect})");
         }
 
         private void NieuwAntwoordBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

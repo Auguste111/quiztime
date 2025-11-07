@@ -58,7 +58,7 @@
         <Border DockPanel.Dock="Bottom" Height="70" Padding="0 15" Background="#FFFFFF" BorderBrush="{StaticResource BorderColor}" BorderThickness="1 0 0 0" Effect="{StaticResource SoftShadow}">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Content="Annuleren" Width="120" Background="#9CA3AF" Click="Cancel_Click" Margin="0 0 15 0"/>
-                <Button Content="✓ Opslaan" Width="140" Background="{StaticResource Success}" Click="SaveAndClose_Click"/>
+                <Button Content="Opslaan" Width="140" Background="{StaticResource Success}" Click="SaveAndClose_Click"/>
             </StackPanel>
         </Border>
 
@@ -141,8 +141,8 @@
                             <Image x:Name="VraagAfbeeldingPreview" Stretch="UniformToFill"/>
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="0 8 0 0" HorizontalAlignment="Center">
-                            <Button Content="📁" Width="44" Height="34" Background="{StaticResource Primary}" Click="SelectFoto_Click" Margin="0 0 6 0"/>
-                            <Button Content="✕" Width="44" Height="34" Background="{StaticResource Danger}" Click="RemoveFoto_Click"/>
+                            <Button Content="Browse" Width="44" Height="34" Background="{StaticResource Primary}" Click="SelectFoto_Click" Margin="0 0 6 0"/>
+                            <Button Content="X" Width="44" Height="34" Background="{StaticResource Danger}" Click="RemoveFoto_Click"/>
                         </StackPanel>
                         <TextBlock x:Name="FotoPathLabel" FontSize="10" Foreground="{StaticResource TextMuted}" Text="Geen foto" TextAlignment="Center" Margin="0 8 0 0"/>
                     </StackPanel>
@@ -151,10 +151,23 @@
 
             <!-- Antwoorden -->
             <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource Surface}" CornerRadius="14" Padding="20" Effect="{StaticResource SoftShadow}" Margin="0 20 0 0">
-                <StackPanel>
-                    <TextBlock Text="Antwoorden" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Primary}" Margin="0 0 0 15"/>
+                <DockPanel LastChildFill="True">
+                    <TextBlock DockPanel.Dock="Top" Text="Antwoorden" FontSize="16" FontWeight="Bold" Foreground="{StaticResource Primary}" Margin="0 0 0 15"/>
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                    <Border DockPanel.Dock="Bottom" BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10" Background="#F9FAFB" Margin="0 20 0 0" Padding="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MinWidth="250"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="NieuwAntwoordBox" Grid.Column="0" Height="32" Margin="0 0 6 0" Padding="8"/>
+                            <CheckBox x:Name="NieuwAntwoordCorrectCheckbox" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 12 0"/>
+                            <Button x:Name="AddAntwoordBtn" Grid.Column="2" Content="Toevoegen" Background="{StaticResource Accent}" Height="32" Click="AddAntwoord_Click" FontWeight="Bold"/>
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListBox x:Name="AntwoordenLijst" Background="Transparent" BorderThickness="0">
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -172,27 +185,14 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBox Text="{Binding Tekst, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="0 0 8 0" Height="36"/>
                                             <CheckBox Grid.Column="1" IsChecked="{Binding IsCorrect}" VerticalAlignment="Center"/>
-                                            <Button Content="✕" Grid.Column="2" Height="30" Width="30" Background="{StaticResource Danger}" Click="RemoveAntwoord_Click" Tag="{Binding Id}"/>
+                                            <Button Content="X" Grid.Column="2" Height="30" Width="30" Background="{StaticResource Danger}" Click="RemoveAntwoord_Click" Tag="{Binding Id}"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </ScrollViewer>
-
-                    <Border BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10" Background="#F9FAFB" Margin="0 20 0 0" Padding="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" MinWidth="250"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="120"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox x:Name="NieuwAntwoordBox" Grid.Column="0" Height="32" Margin="0 0 6 0" Padding="8"/>
-                            <CheckBox x:Name="NieuwAntwoordCorrectCheckbox" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 12 0"/>
-                            <Button x:Name="AddAntwoordBtn" Grid.Column="2" Content="Toevoegen" Background="{StaticResource Accent}" Height="32" Click="AddAntwoord_Click" FontWeight="Bold"/>
-                        </Grid>
-                    </Border>
-                </StackPanel>
+                </DockPanel>
             </Border>
         </Grid>
     </DockPanel>
