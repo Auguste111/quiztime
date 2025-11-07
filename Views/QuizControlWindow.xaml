@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Quiz Besturing" Height="500" Width="900"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F5F5">
+        Background="#F9F5FF">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="15 10"/>
@@ -28,20 +28,20 @@
                    Text="Quiz Besturing" 
                    FontSize="28" 
                    FontWeight="Bold" 
-                   Foreground="#1976D2"
+                   Foreground="#14248A"
                    Margin="0 0 0 20"/>
         
         <!-- Vraag preview -->
-        <Border Grid.Row="1" Background="White" BorderBrush="#DDD" BorderThickness="1" CornerRadius="8" Padding="20">
+        <Border Grid.Row="1" Background="White" BorderBrush="#D4C2FC" BorderThickness="1" CornerRadius="8" Padding="20">
             <StackPanel>
                 <TextBlock Text="Huidige vraag:" 
                            FontSize="12" 
-                           Foreground="#666"
+                           Foreground="#998FC7"
                            Margin="0 0 0 10"/>
                 <TextBlock x:Name="VraagPreview" 
                            FontSize="18" 
                            TextWrapping="Wrap" 
-                           Foreground="#333"
+                           Foreground="#28262C"
                            LineHeight="28"/>
             </StackPanel>
         </Border>
@@ -49,19 +49,22 @@
         <!-- Navigatie buttons -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 15">
             <Button Content="◀ Vorige" 
+                    x:Name="VorigeBtn"
                     Click="Vorige_Click" 
-                    Background="#FF9800"
+                    Background="#998FC7"
                     Width="120"
                     Margin="0 0 10 0"/>
             <Button Content="✓ Toon Antwoord" 
                     x:Name="ToonAntwoordBtn"
                     Click="ToonAntwoord_Click" 
-                    Background="#4CAF50"
+                    Background="#D4C2FC"
+                    Foreground="#28262C"
                     Width="150"
                     Margin="0 0 10 0"/>
             <Button Content="Volgende ▶" 
+                    x:Name="VolgendeBtn"
                     Click="Volgende_Click" 
-                    Background="#2196F3"
+                    Background="#14248A"
                     Width="120"/>
         </StackPanel>
         
@@ -75,13 +78,13 @@
                        x:Name="StatusBar"
                        Text="Wachtend..." 
                        FontSize="12" 
-                       Foreground="#999"
+                       Foreground="#998FC7"
                        TextAlignment="Center"
                        VerticalAlignment="Center"/>
             <Button Grid.Column="1"
                     Content="⏹ Terug naar Hoofdscherm"
                     Click="TerugNaarHoofdscherm_Click"
-                    Background="#E53935"
+                    Background="#14248A"
                     Width="200"
                     Margin="20 0 0 0"/>
         </Grid>

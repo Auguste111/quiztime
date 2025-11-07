@@ -3,19 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Quiz Bewerken"
         Width="1400" Height="900"
-        Background="#F8F7FB"
+        Background="#F9F5FF"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!-- Kleuren -->
-        <SolidColorBrush x:Key="Primary" Color="#7C3AED"/> <!-- paars -->
-        <SolidColorBrush x:Key="Accent" Color="#EC4899"/> <!-- roze -->
+        <!-- Kleuren - Nieuw thema -->
+        <SolidColorBrush x:Key="Primary" Color="#14248A"/> <!-- Resolution Blue -->
+        <SolidColorBrush x:Key="Accent" Color="#998FC7"/> <!-- Tropical Indigo -->
         <SolidColorBrush x:Key="Success" Color="#10B981"/> 
         <SolidColorBrush x:Key="Danger" Color="#EF4444"/>
         <SolidColorBrush x:Key="Surface" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="BorderColor" Color="#E5E7EB"/>
-        <SolidColorBrush x:Key="TextMain" Color="#1E293B"/>
-        <SolidColorBrush x:Key="TextMuted" Color="#6B7280"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#D4C2FC"/>
+        <SolidColorBrush x:Key="TextMain" Color="#28262C"/>
+        <SolidColorBrush x:Key="TextMuted" Color="#998FC7"/>
         <DropShadowEffect x:Key="SoftShadow" Color="#000000" BlurRadius="12" Opacity="0.12" ShadowDepth="2"/>
 
         <!-- Basisstijlen -->
