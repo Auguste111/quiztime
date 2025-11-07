@@ -155,20 +155,20 @@ namespace quiztime.Views
         private void UpdateAddAntwoordButtonState()
         {
             // Vind de "Toevoegen" knop
-            if (selectedVraag != null && selectedVraag.Antwoorden.Count >= 4)
+            var addButton = this.FindName("AddAntwoordBtn") as Button;
+            if (addButton == null)
+                return;
+
+            if (selectedVraag == null)
             {
-                // Disable de knop als we 4 antwoorden hebben
-                var addButton = this.FindName("AddAntwoordBtn") as Button;
-                if (addButton != null)
-                    addButton.IsEnabled = false;
+                addButton.IsEnabled = false;
+                return;
             }
-            else if (selectedVraag != null)
-            {
-                // Enable de knop als we minder dan 4 antwoorden hebben
-                var addButton = this.FindName("AddAntwoordBtn") as Button;
-                if (addButton != null)
-                    addButton.IsEnabled = true;
-            }
+
+            // Disable als we al 4 antwoorden hebben, anders enable
+            addButton.IsEnabled = selectedVraag.Antwoorden.Count < 4;
+            
+            System.Diagnostics.Debug.WriteLine($"🔘 AddAntwoordBtn IsEnabled = {addButton.IsEnabled} (Antwoorden: {selectedVraag.Antwoorden.Count}/4)");
         }
 
         private void AddAntwoord_Click(object sender, RoutedEventArgs e)
