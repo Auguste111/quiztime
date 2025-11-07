@@ -39,6 +39,9 @@ namespace quiztime.Views
                 
                 // Laad foto preview
                 UpdateFotoPreview();
+                
+                // Update knop state - check of we al 4 antwoorden hebben
+                UpdateAddAntwoordButtonState();
             }
             else
             {
@@ -148,6 +151,25 @@ namespace quiztime.Views
             }
         }
 
+        private void UpdateAddAntwoordButtonState()
+        {
+            // Vind de "Toevoegen" knop
+            if (selectedVraag != null && selectedVraag.Antwoorden.Count >= 4)
+            {
+                // Disable de knop als we 4 antwoorden hebben
+                var addButton = this.FindName("AddAntwoordBtn") as Button;
+                if (addButton != null)
+                    addButton.IsEnabled = false;
+            }
+            else if (selectedVraag != null)
+            {
+                // Enable de knop als we minder dan 4 antwoorden hebben
+                var addButton = this.FindName("AddAntwoordBtn") as Button;
+                if (addButton != null)
+                    addButton.IsEnabled = true;
+            }
+        }
+
         private void AddAntwoord_Click(object sender, RoutedEventArgs e)
         {
             if (selectedVraag == null)
@@ -159,6 +181,13 @@ namespace quiztime.Views
             if (string.IsNullOrWhiteSpace(NieuwAntwoordBox.Text))
             {
                 MessageBox.Show("Vul een antwoord in!");
+                return;
+            }
+
+            // Check of we al 4 antwoorden hebben
+            if (selectedVraag.Antwoorden.Count >= 4)
+            {
+                MessageBox.Show("Maximum 4 antwoorden per vraag!");
                 return;
             }
 
@@ -175,6 +204,9 @@ namespace quiztime.Views
             NieuwAntwoordBox.Text = "";
             NieuwAntwoordCorrectCheckbox.IsChecked = false;
             NieuwAntwoordBox.Focus();
+            
+            // Update de knop status
+            UpdateAddAntwoordButtonState();
             
             System.Diagnostics.Debug.WriteLine($"✅ Antwoord toegevoegd: '{antwoord.Tekst}' (Correct: {antwoord.IsCorrect})");
         }
@@ -203,6 +235,9 @@ namespace quiztime.Views
 
             selectedVraag.Antwoorden.Remove(antwoord);
             AntwoordenLijst.Items.Refresh();
+            
+            // Update knop state - mogelijk is de knop nu weer available
+            UpdateAddAntwoordButtonState();
         }
 
         private void Answer_CorrectChanged(object sender, RoutedEventArgs e)

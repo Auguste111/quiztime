@@ -187,7 +187,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="NieuwAntwoordBox" Grid.Column="0" Height="32" Margin="0 0 6 0"/>
                             <CheckBox x:Name="NieuwAntwoordCorrectCheckbox" Grid.Column="1" VerticalAlignment="Center" Margin="0 0 6 0"/>
-                            <Button Grid.Column="2" Content="Toevoegen" Background="{StaticResource Accent}" Height="32" Click="AddAntwoord_Click"/>
+                            <Button x:Name="AddAntwoordBtn" Grid.Column="2" Content="Toevoegen" Background="{StaticResource Accent}" Height="32" Click="AddAntwoord_Click"/>
                         </Grid>
                     </Border>
                 </StackPanel>
