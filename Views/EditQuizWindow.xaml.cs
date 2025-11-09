@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
 using Microsoft.Win32;
 using quiztime.Models;
 using quiztime.Services;
@@ -266,6 +267,19 @@ namespace quiztime.Views
             if (selectedVraag != null)
             {
                 AntwoordenLijst.Items.Refresh();
+            }
+        }
+
+        private void AnswerTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var tb = sender as TextBox;
+            if (tb == null)
+                return;
+
+            if (!tb.IsKeyboardFocusWithin)
+            {
+                e.Handled = true;
+                tb.Focus();
             }
         }
 
